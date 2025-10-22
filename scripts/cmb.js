@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let msg = "";
     let percentilFinal = 0;
 
-    const menor = percentis.find(p => dct <= p.valor);
+    const menor = percentis.find(p => cmb <= p.valor);
     const anterior = percentis[percentis.indexOf(menor) - 1];
 
     if (!menor) {
