@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação Antropométrica</title>
+<link rel="stylesheet" href="../style/style.css">
+<style>
+  body {
+    display: flex;
+  }
+  .formulario, .resultado {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .formulario { flex: 1; }
+  .resultado { width: 400px; }
+  h2 {
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="formulario">
+  <h2>Dados Gerais</h2>
+  <label>Idade (anos): <input type="number" id="idade"></label>
+  <label>Sexo:
+    <select id="sexo">
+      <option value="masculino">Masculino</option>
+      <option value="feminino">Feminino</option>
+    </select>
+  </label>
+  <label>Peso (kg): <input type="number" id="peso" step="0.01"></label>
+  <label>Altura (m): <input type="number" id="altura" step="0.01"></label>
+
+  <h2>Circunferências (cm)</h2>
+  <label>Pescoço: <input type="number" id="pescoco" step="0.1"></label>
+  <label>Cintura: <input type="number" id="cintura" step="0.1"></label>
+  <label>Quadril: <input type="number" id="quadril" step="0.1"></label>
+  <label>Braquial (CB): <input type="number" id="cb" step="0.1"></label>
+
+  <h2>Dobras Cutâneas (mm)</h2>
+  <label>Tríceps: <input type="number" id="triceps" step="0.1"></label>
+  <label>Bíceps: <input type="number" id="biceps" step="0.1"></label>
+  <label>Subescapular: <input type="number" id="subescapular" step="0.1"></label>
+  <label>Supra-ilíaca: <input type="number" id="suprailiaca" step="0.1"></label>
+
+  <div>
+    <button class="voltar" onclick="window.location.href='../index.html'">Voltar ao Menu</button>
+  </div>
+</div>
+
+<div class="resultado">
+  <h2>Resultados</h2>
+  <div id="res"></div>
+</div>
+
+<script src="../scripts/antropometria.js"></script>
+</body>
+</html>
