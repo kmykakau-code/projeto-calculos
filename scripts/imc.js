@@ -23,23 +23,29 @@ document.addEventListener('DOMContentLoaded', () => {
       <p><strong>IMC:</strong> ${imc.toFixed(2)} kg/m² </p>
     `;
 
-    if (idade > 60) {
-        if (imc <= 22) {
+    if (idade >= 60) {
+        if (imc <= 23) {
         html += `
             <div class="classificacaoIMC">
             <p> <strong> Classificação: </strong> Baixo peso </p>
             </div>
             `;
-    }else if (imc < 27){
+    }else if (imc <= 27.9){
         html += `
         <div class="classificacaoIMC">
             <p> <strong> Classificação: </strong> Eutrofia </p>
         </div>
       `;
+    }else if (imc <= 29.9){
+        html += `
+        <div class="classificacaoIMC">
+            <p> <strong> Classificação: </strong> Sobrepeso </p>
+        </div>
+      `;
     }else {
         html += `
         <div class="classificacaoIMC">
-            <p> <strong> Classificação: </strong> Sobrepeso/Excesso de peso </p>
+            <p> <strong> Classificação: </strong> Obesidde </p>
         </div>
         `;
     }
