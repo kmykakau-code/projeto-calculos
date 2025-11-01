@@ -4,16 +4,16 @@ inputs.forEach(i => i.addEventListener('input', calcular));
 
 function classificarIMC(imc, idade) {
   if (idade >= 60) {
-    if (imc < 22) return "Baixo peso";
-    if (imc <= 27) return "Eutrofia";
-    return "Sobrepeso";
+    if (imc < 22) return {texto: "Baixo peso", classe: "moderado"};
+    if (imc <= 27) return {texto: "Eutrofia",classe: "normal"};
+    return {texto: "Sobrepeso", classe: "alto "};
   } else {
-    if (imc < 18.5) return "Baixo peso";
-    if (imc < 25) return "Eutrofia";
-    if (imc < 30) return "Sobrepeso";
-    if (imc < 35) return "Obesidade I";
-    if (imc < 40) return "Obesidade II";
-    return "Obesidade III";
+    if (imc < 18.5) return {texto: "Baixo peso", classe: "alto"};
+    if (imc < 25) return {texto: "Eutrofia", classe: "normal"};
+    if (imc < 30) return {texto: "Sobrepeso", classe: "moderado"};
+    if (imc < 35) return {texto: "Obesidade I", classe: "alto"};
+    if (imc < 40) return {texto: "Obesidade II", classe: "alto"};
+    return {texto: "Obesidade III", classe: "alto"};
   }
 }
 
@@ -34,6 +34,16 @@ function classificarCintura(cintura, sexo) {
     if (cintura < 94) return {texto: "Faixa ideal", classe: "normal"};
     if (cintura <= 102) return {texto: "Risco aumentado", classe: "moderado"};
     return {texto: "Risco muito aumentado", classe: "alto"};
+  }
+}
+
+function classificacaoConicidade(sexo, ic){
+  if(sexo === 'masculino'){
+    if(ic >= 1.25) return{ texto: "Alto risco", classe: "alto"};
+    return {texto: "Baixo risco", classe: "normal"}
+  }else{
+    if(ic >= 1.18) return{ texto: "Alto risco", classe: "alto"};
+    return {texto: "Baixo risco", classe: "normal"}
   }
 }
 
@@ -64,16 +74,18 @@ function calcular() {
   const classIMC = classificarIMC(imc, idade);
   const classRCQ = classificarRCQ(rcq, sexo);
   const classCintura = classificarCintura(cintura, sexo);
+  const classConicidade = classificacaoConicidade(sexo, ic);
 
   document.getElementById('res').innerHTML = `
     <span><b>IMC:</b> ${imc.toFixed(2)} kg/m² 
-      <span class="classificacao">(${classIMC})</span></span>
+      <span class="classificacao ${classIMC.classe}">(${classIMC.texto})</span></span>
     <span><b>Soma 4 Dobras:</b> ${soma4.toFixed(1)} mm</span>
     <span><b>Razão Cintura-Quadril:</b> ${rcq.toFixed(2)} 
       <span class="classificacao ${classRCQ.includes('Alto') ? 'alto' : 'normal'}">(${classRCQ})</span></span>
     <span><b>Circunferência da Cintura:</b> ${cintura.toFixed(1)} cm 
       <span class="classificacao ${classCintura.classe}">(${classCintura.texto})</span></span>
-    <span><b>Índice de Conicidade:</b> ${ic.toFixed(3)}</span>
+    <span><b>Índice de Conicidade:</b> ${ic.toFixed(2)}
+      <span class="classificacao ${classConicidade.classe}"> (${classConicidade.texto})</span>
     <span><b>Circunf. Muscular do Braço:</b> ${cmb.toFixed(2)} cm</span>
     <span><b>Área Muscular do Braço Corrigida:</b> ${ambc.toFixed(2)} cm²</span>
     <span><b>DCT + DCSE:</b> ${dctdcse.toFixed(1)} mm</span>
